@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Raw source data
+data/raw/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Secrets
+.env
+
+# Keep processed CSVs for dashboard reproduction
+# data/processed/ ko ignore nahi karna
