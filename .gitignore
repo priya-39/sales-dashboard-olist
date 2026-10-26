@@ -16,3 +16,4 @@ data/raw/
 
 # Keep processed CSVs for dashboard reproduction
 # data/processed/ ko ignore nahi karna
+*.pbix

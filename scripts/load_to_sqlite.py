@@ -3,7 +3,7 @@ import sqlite3
 import pandas as pd
 
 # Project folders
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "raw"
 DB_PATH = BASE_DIR / "olist.db"
 

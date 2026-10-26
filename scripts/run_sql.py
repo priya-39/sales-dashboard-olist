@@ -3,7 +3,7 @@ from pathlib import Path
 import sqlite3
 import pandas as pd
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = BASE_DIR / "olist.db"
 SQL_PATH = BASE_DIR / "sql" / "sales_analysis.sql"
 

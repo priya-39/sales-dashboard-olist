@@ -3,19 +3,20 @@ from pathlib import Path
 import sqlite3
 import pandas as pd
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 DB_PATH = BASE_DIR / "olist.db"
 OUTPUT_DIR = BASE_DIR / "data" / "processed"
 
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 queries = {
-    "monthly_orders": """
+        "monthly_orders": """
         SELECT
             strftime('%Y-%m', order_purchase_timestamp) AS month,
             COUNT(*) AS total_orders
         FROM olist_orders_dataset
         WHERE order_purchase_timestamp IS NOT NULL
+          AND order_status = 'delivered'
         GROUP BY month
         ORDER BY month
     """,
@@ -33,7 +34,7 @@ queries = {
         ORDER BY month
     """,
 
-    "category_sales": """
+        "category_sales": """
         SELECT
             COALESCE(
                 t.product_category_name_english,
@@ -42,10 +43,13 @@ queries = {
             ) AS category,
             ROUND(SUM(oi.price), 2) AS item_sales_value
         FROM olist_order_items_dataset oi
+        JOIN olist_orders_dataset o
+            ON o.order_id = oi.order_id
         JOIN olist_products_dataset p
             ON oi.product_id = p.product_id
         LEFT JOIN product_category_name_translation t
             ON p.product_category_name = t.product_category_name
+        WHERE o.order_status = 'delivered'
         GROUP BY category
         ORDER BY item_sales_value DESC
     """
