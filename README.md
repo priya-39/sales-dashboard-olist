@@ -45,6 +45,12 @@ The original dataset, local SQLite database, and Power BI `.pbix` file are not i
 
 ## Data Quality and Metric Definitions
 
+**Documentation:**
+
+- [Data Quality Checks](docs/data_quality_checks.md)
+- [Metric Definitions](docs/metrics_definitions.md)
+- [AI-Assisted Workflow](docs/ai_workflow.md)
+
 - The database contains eight tables loaded from the supplied CSV files.
 - One delivered order has no payment record. Therefore, AOV is calculated using 96,477 delivered orders with payment records.
 - Orders may have multiple payment records, such as installments. Payment totals and order counts must therefore be interpreted according to the SQL query's aggregation method.
