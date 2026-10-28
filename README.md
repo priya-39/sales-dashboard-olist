@@ -51,12 +51,15 @@ The original dataset, local SQLite database, and Power BI `.pbix` file are not i
 - [Metric Definitions](docs/metrics_definitions.md)
 - [AI-Assisted Workflow](docs/ai_workflow.md)
 
+**Key notes:**
+
 - The database contains eight tables loaded from the supplied CSV files.
 - One delivered order has no payment record. Therefore, AOV is calculated using 96,477 delivered orders with payment records.
 - Orders may have multiple payment records, such as installments. Payment totals and order counts must therefore be interpreted according to the SQL query's aggregation method.
 - Some months at the beginning and end of the dataset have very few orders.
 - Monthly order exports include delivered orders only.
 - Category sales exports include delivered-order items only.
+- The average review score is calculated over all reviews and is not filtered by order status.
 - Item sales value is calculated using item prices and excludes freight. Payment value is calculated from payment records, so the two totals are not expected to match.
 - The monthly order export totals 96,478 delivered orders, and category item sales total R$ 13,221,498.11.
 
@@ -84,7 +87,9 @@ sales-dashboard-olist/
 │   ├── raw/                       # Original CSV datasets (not tracked)
 │   └── processed/                 # Dashboard summary CSVs
 ├── docs/
-│   └── ai_workflow.md
+│   ├── ai_workflow.md
+│   ├── data_quality_checks.md
+│   └── metrics_definitions.md
 ├── screenshots/
 │   ├── README.md
 │   └── dashboard_v1.png
@@ -117,7 +122,7 @@ python -m pip install -r requirements.txt
 
 ### 2. Add the raw datasets
 
-Download the eight required CSV files from Kaggle and place them in `data/raw/`.
+Download the Kaggle dataset and place these eight CSV files in `data/raw/`: customers, orders, order_items, order_payments, order_reviews, products, sellers and product_category_name_translation. Leave out `olist_geolocation_dataset.csv`, because the scripts load every CSV found in that folder.
 
 ### 3. Run the analysis scripts
 
@@ -143,7 +148,7 @@ Open the processed CSV files from `data/processed/` in Power BI Desktop and recr
 
 ## AI-Assisted Workflow
 
-AI tools supported parts of the SQL, DAX, and documentation workflow. Suggestions were reviewed against query outputs and independent calculations. Workflow notes are available in [`docs/ai_workflow.md`](docs/ai_workflow.md).
+AI tools supported parts of the SQL, Power BI metric-definition, and documentation workflow. Suggestions were reviewed against query outputs and independent calculations. Workflow notes are available in [`docs/ai_workflow.md`](docs/ai_workflow.md).
 
 ## Author
 

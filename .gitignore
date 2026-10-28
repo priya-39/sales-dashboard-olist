@@ -14,6 +14,6 @@ data/raw/
 # Secrets
 .env
 
-# Keep processed CSVs for dashboard reproduction
-# data/processed/ ko ignore nahi karna
+# Power BI project file (kept locally)
 *.pbix
+# Note: data/processed/ is NOT ignored, so the dashboard CSVs stay in the repo.
